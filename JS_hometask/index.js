@@ -4,62 +4,62 @@ function hello1 (){
   let text = "Привет, JavaScript!";
   return text;
 }
-console.log( hello1() );
+console.log(hello1());
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //2
-function hello2 (name) {
+function hello2 (name = 'Вася') {
 
-  if (!name) {
-    console.log('Привет, гость!');
+  if (name) {
+    console.log ('Привет, ' + name);
   } else {
-    console.log('Привет, ' + name);
+    console.log('Привет, гость!');
   }
-  //name ? console.log ('Привет, ' + name) : console.log('Привет, гость!');
 }
-hello2("Вася");
+hello2();
+
 
 //3
 function mul(n, m){
+
+  n = !n ? NaN : n;
+  m = !m ? NaN : m;
+  
   return m * n;
 }
 console.log (mul(2,4));
 
+
+
 //4
-function repeat(string, n) {
-  n = !n ? 2 : n;  
-  string = !string ? "" : string;  
-  let text = ""; 
-  for (let i = 0; i < n; i++) { 
-    text = text + string;
-  }
-  return text;
+function repeat(str = '', n = 2) {
+  
+  return str.repeat(n);
 }
-console.log (repeat("привет", 4));
+
+repeat();
 
 
 //5
 function rgb(a,b,c) {
 
-a = !a ? 0 : a;
-b = !b ? 0 : b;
-c = !c ? 0 : c;
-
-return "rgb(" + a + ", " + b + ", " + c + ")";
+return `rgb(${a ? a : 0}, ${b ? b : 0}, ${c ? c : 0})`;
 }
 console.log (rgb(23,100,134));
 
+
 //6
-function avg() {
+function avg(numbers) {
+numbers = !numbers ? NaN : numbers;
 
- let sum = 0;
-    for (i=0; i < arguments.length; i++) {
-        sum += arguments[i];
-    }
-  console.log (sum / arguments.length);
+  let sum = 0;
+  for (i=0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log (sum / numbers.length);
 }
-let numbers = [3, 2, 4];
-avg.apply(this, numbers);
 
+avg([3, 5]);
 
 
 //7
@@ -84,7 +84,7 @@ words(25);
 
 //8
 
-unction ur2(a, b, c) { 
+function ur2(a, b, c) { 
   let d = b*b - 4*a*c; 
   let x1 = 0; 
   let x2 = 0; 
@@ -104,7 +104,7 @@ ur2(1,4,1);
 let f = x => x === undefined ? 0 : 1; 
 console.log(f()); 
 
-//10
+//10 первый вариант я пробовала передавать сум аргументов через for in что-то сделала сама не знаю что :I
 let sum = object => { 
   let result = 0; 
   for (const property in object) { 
@@ -113,6 +113,11 @@ let sum = object => {
   return result; 
 } 
 console.log(sum({a: 4, b: 9})); 
+
+/// или
+let sum = (a,b) => a + b;
+console.log (sum(4,9));
+
 
 
 //11
@@ -124,26 +129,82 @@ let sortAscending = array => {
 const array = [1, 2, 56, 28, 90, 5, 6]; 
 console.log(sortAscending(array)); 
 
-//12 пока я максимально запуталась нужно время на подумать
-let splitUsers = array => { 
-  let minors = array.filter(a => a.age < 18).sort((a,b) => b.age - a.age); 
-  let adults = array.filter(a => a.age >= 18).sort((a,b) => b.age - a.age); 
-  console.log(minors); 
-  console.log(adults); 
-} 
+//12
 
-let removeMinors = array => { 
+let splitUsers = array => {
+  let minors = array.filter(a => a.age < 18).sort((a,b) => b.age - a.age);
+  let adults = array.filter(a => a.age >= 18).sort((a,b) => b.age - a.age);
+  console.log(minors);
+  console.log(adults);
+}
 
-  for (const object in array) { 
-      console.log("df"); 
-      console.log(property); 
-      if (property < 18) { 
-          array.splice(array.indexOf(property), 1); 
-      } 
-  } 
-} 
+let removeMinors = array => {
+  console.log("before deletion");
+  console.log(array);
+  array.forEach(function (item, i, array) {
+
+      if (item.age < 18) {
+          array.splice(i, 1);
+      }
+  })
+  console.log("after deletion");
+  console.log(array);
+}
+let items = [{name: 'Ivan', age: 18}, {name: 'Petr', age: 12}, {name: 'Sidor', age: 25}, {name: 'Pavel', age: 24}, {name: 'Sasha', age: 29}]
+
+splitUsers(items);
+removeMinors(items);
+let modifyArray = array => {
+
+  console.log("leng = " + array.length);
+  console.log(array);
+  array.push(4);
+  let leng = array.length;
+  console.log("leng = " + leng);
+  console.log(array);
+  array.unshift(array[array.length - 1]);
+  console.log(array);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//// Дан массив var arr = [1, 10, 25, 67, 87, 56]. Добавить в конец массива число 4. Вывести полученный массив и в переменную leng сохранить его новую длину.
+	  //Из полученного массива извлечь последний элемент. Извлеченный элемент добавить вначало массива. 1
+
+    
+
+/////////////////////////////////////////////////////////////////////////////////////////
+let users = [
+  {id: 1, name: "Вася", age: 20},
+  {id: 2, name: "Петя", age: 19},
+  {id: 3, name: "Маша", age: 18}
+];
+
+let modifyUsers = users => {
+  let user = {id: 4, name: "Дима", age: 17};
+  users.push(user);
+  console.log(users);
+  users.reverse();
+  console.log(users);
+  let sum = 0;
+  users.forEach(item => {
+      if (item.name === "Петя") {
+          console.log(item.age);
+      }
+      sum += item.age;
+  })
+  console.log(sum);
+}
+modifyUsers(users);
 
 
-let items = [{name: 'Ivan', age: 18}, {name: 'Petr', age: 12}, {name: 'Sidor', age: 25}, {name: 'Pavel', age: 24}, {name: 'Sasha', age: 29}] 
-splitUsers(items); 
-//removeMinors(items);
+let createUniqueArray = array => {
+  let arrUnique = array.reduce((a, b) => {
+     if (a.indexOf(b) < 0) {
+         a.push(b);
+     }
+     return a;
+  }, []);
+  console.log(arrUnique);
+}
+
+
