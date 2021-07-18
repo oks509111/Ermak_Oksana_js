@@ -1,7 +1,21 @@
 "use strict";
 //1
 let array1 = [1, 2, 3, 4, 4, 5, 2, 9, 4];
-createUniqueArray(array1);
+let arrUnique = [...new Set([1, 2, 3, 4, 4, 5, 2, 9, 4])];
+console.log(arrUnique);
+
+// 
+
+let array1 = [1, 2, 3, 4, 4, 5, 2, 9, 4];
+let arrUnique =array1.filter((item, index) => array1.indexOf(item)===index);
+console.log(arrUnique);
+//
+let array1 = [1, 2, 3, 4, 4, 5, 2, 9, 4];
+let arrUnique = array1.reduce((unique, item)=>
+unique.includes(item) ? unique : [... unique, item], []);
+console.log(arrUnique);
+
+
 
 //2
 let makeAdultUsers = users => {
