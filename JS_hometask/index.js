@@ -18,25 +18,22 @@ function hello2 (name = 'Вася') {
 }
 hello2();
 
-
 //3
 function mul(n, m){
 
-  n = !n ? NaN : n;
-  m = !m ? NaN : m;
-  
+if ( n != '' && m != '' && typeof n === "number" && typeof n === "number") {
   return m * n;
+} else {
+  console.log("Error")
 }
-console.log (mul(2,4));
-
-
+}
+mul(2,4);
 
 //4
 function repeat(str = '', n = 2) {
   
   return str.repeat(n);
 }
-
 repeat();
 
 
@@ -50,13 +47,8 @@ console.log (rgb(23,100,134));
 
 //6
 function avg(numbers) {
-numbers = !numbers ? NaN : numbers;
-
-  let sum = 0;
-  for (i=0; i < numbers.length; i++) {
-    sum += numbers[i];
-  }
-  console.log (sum / numbers.length);
+   
+  return numbers.reduce((a, b) => (a + b)) / numbers.length;
 }
 
 avg([3, 5]);
@@ -107,16 +99,22 @@ console.log(f());
 //10 первый вариант я пробовала передавать сум аргументов через for in что-то сделала сама не знаю что :I
 let sum = object => { 
   let result = 0; 
-  for (const property in object) { 
+  for (let property in object) { 
       result += object[property]; 
   } 
   return result; 
 } 
 console.log(sum({a: 4, b: 9})); 
 
+
 /// или
 let sum = (a,b) => a + b;
 console.log (sum(4,9));
+
+/*let sum = function (a,b) {
+  return a + b
+}
+console.log(sum(4,9));*/
 
 
 
@@ -167,10 +165,49 @@ let modifyArray = array => {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-//// Дан массив var arr = [1, 10, 25, 67, 87, 56]. Добавить в конец массива число 4. Вывести полученный массив и в переменную leng сохранить его новую длину.
-	  //Из полученного массива извлечь последний элемент. Извлеченный элемент добавить вначало массива. 1
+let arr = [1, 10, 25, 67, 87, 56];
 
-    
+let leng = arr.push(4);
+console.log(arr);
+
+console.log(leng);
+
+let changeElement = arr.pop();
+
+arr.unshift(changeElement);
+console.log(arr);
+
+//
+let arr1 = [2, 5, 90, 4]
+let arr2 = arr.concat(arr1);
+console.log (arr2);
+
+//
+arr2.indexOf(90);  
+arr2.splice(9, 1, 19, 2, 91);
+console.log(arr2);
+
+//
+let arr3 = arr2.slice(-4);
+console.log(arr3);
+
+arr3.sort(function (a, b){
+  return a - b
+});
+console.log(arr3);
+
+//
+
+arr2.sort (function (b,a){
+  return b - a 
+});
+
+console.log(arr2);
+
+let total = arr2.reduce(function(a,b){
+  return a + b
+});
+console.log(total);
 
 /////////////////////////////////////////////////////////////////////////////////////////
 let users = [
@@ -195,7 +232,6 @@ let modifyUsers = users => {
   console.log(sum);
 }
 modifyUsers(users);
-
 
 let createUniqueArray = array => {
   let arrUnique = array.reduce((a, b) => {
