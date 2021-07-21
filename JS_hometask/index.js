@@ -45,13 +45,22 @@ return `rgb(${a ? a : 0}, ${b ? b : 0}, ${c ? c : 0})`;
 console.log (rgb(23,100,134));
 
 
-//6
-function avg(numbers) {
+//6 мне кажется очень сложно :I
+function avg() {
    
-  return numbers.reduce((a, b) => (a + b)) / numbers.length;
+  let args = [... arguments];
+  let isOk = args[0].every(a => {
+    return typeof a === "number"
+  });
+if(!isOk) {
+  return "Error";
+}
+  return args[0].reduce((a, b) => (a + b)) / args[0].length;
+   
 }
 
-avg([3, 5]);
+let result = avg([3, 5]);
+console.log(result);
 
 
 //7
