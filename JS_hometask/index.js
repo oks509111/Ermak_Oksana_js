@@ -1,6 +1,20 @@
 "use strict";
 //1
 let array1 = [1, 2, 3, 4, 4, 5, 2, 9, 4];
+
+
+let arrUnique = array1.reduce((num1, num2) => {
+    if (num1.indexOf(num2) === -1) {
+      num1.push(num2);
+    }
+    return num1;
+  }, []);
+  
+  console.log(arrUnique);
+
+
+/////
+let array1 = [1, 2, 3, 4, 4, 5, 2, 9, 4];
 let arrUnique = [...new Set([1, 2, 3, 4, 4, 5, 2, 9, 4])];
 console.log(arrUnique);
 
@@ -40,22 +54,17 @@ let users1 = [
 let usersAfterYear = makeAdultUsers(users1);
 
 //3
-let createUniqueObjectArray = array => {
-    let obj = {};
 
-    for (let i = 0, len = array.length; i < len; i++) {
-        obj[array[i]['age']] = array[i];
+
+let usersAfterYearUniqueAge =  usersAfterYear.reduce((users1, users) => {
+    if (users1.indexOf(users) === -1){
+        users1.push(users);
     }
+    return users1;
+}, []);
 
-    array = [];
-    for (let key in obj) {
-        array.push(obj[key]);
-    }
-    console.log(array);
-    return array;
-}
+console.log(usersAfterYear);
 
-let usersAfterYearUniqueAge = createUniqueObjectArray(usersAfterYear);
 
 //4
 let fibonachi = n => {
@@ -95,10 +104,9 @@ console.log(user1);
 console.log(user2);
 
 //8
-function fullInfo() {
-    console.log(this);
-}
+User.prototype.info = function () {
+    console.log(this.first_name, this.second_name, this.age, this.city);
+};
 
-user1.print = fullInfo;
-user2.print = fullInfo;
-user1.print();
+user1.info();
+user2.info();
