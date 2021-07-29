@@ -5,13 +5,14 @@ function cleanRoom() {
     setTimeout(() => console.log("Команата убрана"), 5000);
 }
 
-let cleanRoom = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve (console.log("Команата убрана"));
-    }, 5000);
+function cleanRoom () {
+return new Promise ((resolve, reject) => {
+    setTimeout(() => 
+      resolve ("Команата убрана"), 5000);
   });
+}
 
-cleanRoom.then (
+cleanRoom().then (
     result => console.log (result),
     error => console.log (error)
 );
