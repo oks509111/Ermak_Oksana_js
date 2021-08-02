@@ -1,7 +1,8 @@
 "use strict";
 
+
 //1 продолжение 4 задачи
-const cleanRoom = (...levels) => { 
+/*const cleanRoom = (...levels) => { 
     const promises = levels.map((level) => new Promise((resolve, reject) => { 
         if (level < 0 || level > 10) { 
             reject("Значение параметра может быть от 0 до 10"); 
@@ -13,13 +14,35 @@ const cleanRoom = (...levels) => {
     })); 
  
     return Promise.all(promises); 
+} */
+
+const cleanRooms = (dirtyLevel_1, dirtyLevel_2, dirtyLevel_3) => { 
+    cleanRoom(dirtyLevel_1) 
+        .then((result) => { 
+            console.log(`Уборка комнаты 1 проведена успешно за ${result} секунд`); 
+            return cleanRoom(dirtyLevel_2); 
+        }) 
+        .then((result) => { 
+            console.log(`Уборка комнаты 2 проведена успешно за ${result} секунд`); 
+            return cleanRoom(dirtyLevel_3); 
+        }) 
+        .then((result) => { 
+            console.log(`Уборка комнаты 3 проведена успешно за ${result} секунд`); 
+        }) 
+        
+        .catch(err => { 
+            console.log(err); 
+        }); 
 } 
  
-cleanRoom(3, 1, 2) 
+cleanRooms(3, 5, 7);
+
+ 
+/*cleanRoom(3, 1, 2) 
     .then(result => { 
         const printResult = (arr) => arr.map(r => console.log(`Уборка проведена успешно за ${r} секунд`)); 
         printResult(result); 
     }) 
     .catch(err => { 
         console.error(err); 
-    });
+    });*/
