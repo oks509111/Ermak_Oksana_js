@@ -37,7 +37,11 @@ const cleanRooms = (dirtyLevel_1, dirtyLevel_2, dirtyLevel_3) => {
  
 cleanRooms(3, 5, 7);
 
- 
+const cleanRoomsParal = (dirtyLevel_1, dirtyLevel_2, dirtyLevel_3) => { 
+    return Promise.all([cleanRoom(dirtyLevel_1), cleanRoom(dirtyLevel_2), cleanRoom(dirtyLevel_3)]) 
+        .then(r => console.log(`Уборка комнат выполнена за ${r} секунд`)); 
+}
+
 /*cleanRoom(3, 1, 2) 
     .then(result => { 
         const printResult = (arr) => arr.map(r => console.log(`Уборка проведена успешно за ${r} секунд`)); 
