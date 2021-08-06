@@ -1,52 +1,39 @@
 "use strict";
 
 
-//1 продолжение 4 задачи
-/*const cleanRoom = (...levels) => { 
-    const promises = levels.map((level) => new Promise((resolve, reject) => { 
-        if (level < 0 || level > 10) { 
-            reject("Значение параметра может быть от 0 до 10"); 
-        } else { 
-            setTimeout(() => { 
-                resolve(level); 
-            }, level * 1000) 
-        } 
-    })); 
+const cleanRoom = (dirtyLevel  = 0) => { 
  
-    return Promise.all(promises); 
-} */
-
-const cleanRooms = (dirtyLevel_1, dirtyLevel_2, dirtyLevel_3) => { 
-    cleanRoom(dirtyLevel_1) 
-        .then((result) => { 
-            console.log(`Уборка комнаты 1 проведена успешно за ${result} секунд`); 
-            return cleanRoom(dirtyLevel_2); 
-        }) 
-        .then((result) => { 
-            console.log(`Уборка комнаты 2 проведена успешно за ${result} секунд`); 
-            return cleanRoom(dirtyLevel_3); 
-        }) 
-        .then((result) => { 
-            console.log(`Уборка комнаты 3 проведена успешно за ${result} секунд`); 
-        }) 
-        
-        .catch(err => { 
-            console.log(err); 
-        }); 
-} 
+    return new Promise((resolve, reject) => { 
  
-cleanRooms(3, 5, 7);
-
-const cleanRoomsParal = (dirtyLevel_1, dirtyLevel_2, dirtyLevel_3) => { 
-    return Promise.all([cleanRoom(dirtyLevel_1), cleanRoom(dirtyLevel_2), cleanRoom(dirtyLevel_3)]) 
-        .then(r => console.log(`Уборка комнат выполнена за ${r} секунд`)); 
+        setTimeout(() => { 
+            if (dirtyLevel < 0 || dirtyLevel > 10) { 
+                reject(`Значение параметра может быть от 0 до 10`); 
+            } else { 
+                resolve(dirtyLevel); 
+            } 
+        }, dirtyLevel * 1000); 
+      }); 
 }
 
-/*cleanRoom(3, 1, 2) 
-    .then(result => { 
-        const printResult = (arr) => arr.map(r => console.log(`Уборка проведена успешно за ${r} секунд`)); 
-        printResult(result); 
-    }) 
-    .catch(err => { 
-        console.error(err); 
-    });*/
+
+async function cleanRooms(dirtyLevel_1, dirtyLevel_2, dirtyLevel_3) {
+  try{
+    const result1 = await cleanRoom(dirtyLevel_1);
+    console.log(`Уборка комнаты 1 проведена успешно за ${result1} секунд`);
+
+    const result2 = await cleanRoom(dirtyLevel_2);
+    console.log(`Уборка комнаты 2 проведена успешно за ${result2} секунд`);
+
+    const result3 = await cleanRoom(dirtyLevel_3);
+    console.log(`Уборка комнаты 3 проведена успешно за ${result3} секунд`);
+
+  }catch(err){
+    console.log(err);
+  }
+
+}
+ 
+  cleanRooms(7,3,9);
+  
+  
+
